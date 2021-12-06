@@ -1,5 +1,5 @@
-import simple_drop
-get_files = simple_drop.get_filelist()
+from simple_drop import get_filelist
+get_files = get_filelist()
 
 print(get_files)
 
