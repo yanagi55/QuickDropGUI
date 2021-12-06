@@ -1,24 +1,30 @@
 import wx
 import wx.lib.newevent
+import os
+
 drop_event, EVT_DROP_EVENT = wx.lib.newevent.NewEvent()
 
 class DropTarget(wx.FileDropTarget):
     def __init__(self, parent):
         wx.FileDropTarget.__init__(self)
         self.obj = parent
-        # self.file = False
 
     def OnDropFiles(self, x, y, filenames):
-        evt = drop_event(data=filenames)
+        files = self.get_nested_files(filenames)
+        evt = drop_event(data=files)
         wx.PostEvent(self.obj.frame, evt)
         return True
-        # if os.path.isdir(filenames[0]):
-        #     self.file = False
-        # else:
-        #     self.file = True
-        # return True
-        # test.append(filenames)
-
+    
+    def get_nested_files(self, filenames):
+        temp_path = []
+        for path in filenames:
+            if os.path.isfile(path):
+                temp_path.append(path)
+            if os.path.isdir(path):
+                for curDir, deep_dirs, files in os.walk(path):
+                    for file in files:
+                        temp_path.append(os.path.join(curDir, file))
+        return temp_path
 
 class GUI:
     def __init__(self):
@@ -35,11 +41,8 @@ class GUI:
         self.frame.Show()
     
     def OnDropped(self, event):
-        # self.frame.datas.append(event.data)
         self.frame.data = event.data
         self.frame.Close(True)
-
-
 
 def get_filelist() -> list[str]:
     app = wx.App()
