@@ -19,3 +19,6 @@ print(paths)
 $ ['filepathA', 'filepathB', ...]
 ```
 
+### Environment
+---
+- Windows 10
