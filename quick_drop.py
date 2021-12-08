@@ -33,6 +33,7 @@ class GUI:
         self.frame.Centre()
         panel = wx.Panel(self.frame, wx.ID_ANY, size=(200,200))
         panel.SetToolTip(u'Drop Here')
+        text = wx.StaticText(panel, wx.ID_ANY, 'Drop Files Here')
 
         self.frame.drop = DropTarget(self)
         self.frame.SetDropTarget(self.frame.drop)
