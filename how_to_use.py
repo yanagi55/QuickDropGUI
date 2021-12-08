@@ -1,4 +1,4 @@
-from simple_drop import get_filelist
+from quick_drop import get_filelist
 get_files = get_filelist()
 
 print(get_files)

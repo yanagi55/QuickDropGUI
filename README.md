@@ -12,7 +12,7 @@ Create a window which able to accept files with Drag-and-Drop
 ## How to use
 ---
 ```python
-from simple_drop import get_filelist
+from quick_drop import get_filelist
 paths = get_filelist()
 
 print(paths)
